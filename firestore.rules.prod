@@ -1,0 +1,89 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ✅ Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // 🏆 Tournaments - Allow read for authenticated users, admin write
+    match /tournaments/{tournamentId} {
+      allow read: if request.auth != null; 
+      allow create, update, delete: if request.auth != null && 
+        (request.auth.token.admin == true || 
+         request.auth.token.role == "admin" || 
+         request.auth.token.role == "super");
+    }
+
+    // 🏆 Leagues - Allow read for authenticated users, admin write
+    match /leagues/{leagueId} {
+      allow read: if request.auth != null; 
+      allow create, update, delete: if request.auth != null && 
+        (request.auth.token.admin == true || 
+         request.auth.token.role == "admin" || 
+         request.auth.token.role == "super");
+    }
+
+    // 🎮 Matches - Allow read for authenticated users, admin write
+    match /matches/{matchId} {
+      allow read: if request.auth != null;
+      allow create, update, delete: if request.auth != null && 
+        (request.auth.token.admin == true || 
+         request.auth.token.role == "admin" || 
+         request.auth.token.role == "super");
+    }
+
+    // 🧑 Players - Allow users to read their own data, create/update their profile
+    match /players/{playerId} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null && request.auth.uid == playerId;
+      allow update: if request.auth != null && 
+        (request.auth.uid == playerId || 
+         request.auth.token.admin == true || 
+         request.auth.token.role == "admin" || 
+         request.auth.token.role == "super");
+      allow delete: if false;
+    }
+
+    // 👑 Admins - Only super admins can access
+    match /admins/{adminId} {
+      allow read, write: if request.auth != null && 
+        (request.auth.token.admin == true || 
+         request.auth.token.role == "super");
+    }
+
+    // ⚙️ Admin Control Settings - Only super admins can access
+    match /admin/{docId} {
+      allow read, write: if request.auth != null && 
+        (request.auth.token.admin == true || 
+         request.auth.token.role == "super");
+    }
+
+    // 📊 Audit Logs - Only super admins can access
+    match /auditLogs/{logId} {
+      allow read, write: if request.auth != null && 
+        (request.auth.token.admin == true || 
+         request.auth.token.role == "super");
+    }
+
+    // 💳 Tier-specific resources (example)
+    match /premiumContent/{docId} {
+      allow read: if request.auth != null
+        && (request.auth.token.tierId == "premium" || 
+            request.auth.token.tierId == "elite" || 
+            request.auth.token.tierId == "admin" ||
+            request.auth.token.admin == true);
+    }
+
+    // 🎯 Onboarding - Allow users to read/write their own onboarding status
+    match /onboarding/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // 📝 User Profiles - Allow users to read/write their own profile
+    match /userProfiles/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+}

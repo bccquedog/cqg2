@@ -1,0 +1,49 @@
+{
+  "players": {
+    "player1": {
+      "gamerTag": "PlayerOne",
+      "avatarUrl": "https://example.com/avatar1.png",
+      "status": "online"
+    },
+    "player2": {
+      "gamerTag": "PlayerTwo",
+      "avatarUrl": "https://example.com/avatar2.png",
+      "status": "idle"
+    },
+    "player3": {
+      "gamerTag": "PlayerThree",
+      "avatarUrl": "https://example.com/avatar3.png",
+      "status": "in_match"
+    }
+  },
+  "tournaments": {
+    "tourney1": {
+      "name": "CQG Beta Cup",
+      "game": "Call of Duty",
+      "status": "setup",
+      "settings": {
+        "format": "single_elimination",
+        "checkInWindow": 30
+      },
+      "players": ["player1", "player2", "player3"]
+    }
+  },
+  "tournaments/tourney1/matches": {
+    "match1": {
+      "playerA": "player1",
+      "playerB": "player2",
+      "status": "pending",
+      "score": null,
+      "winner": null
+    }
+  },
+  "events": {
+    "event1": {
+      "title": "CQG Pregame Test",
+      "type": "pregame",
+      "status": "upcoming",
+      "streams": [],
+      "startTime": "2025-09-15T19:00:00Z"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+// Storage locked for prod
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    
+    // Profile avatars
+    match /profiles/{userId}/avatar.jpg {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // Clips
+    match /clips/{userId}/{clipId} {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // Admin-only assets
+    match /assets/{type}/{fileName} {
+      allow read: if true;
+      allow write: if request.auth.token.admin == true;
+    }
+  }
+}
+
+

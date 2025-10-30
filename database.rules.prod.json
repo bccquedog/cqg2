@@ -1,0 +1,18 @@
+{
+  "rules": {
+    "presence": {
+      "$userId": {
+        ".read": true,
+        ".write": "auth != null && auth.uid === $userId"
+      }
+    },
+    "chat": {
+      "$matchId": {
+        ".read": true,
+        ".write": "auth != null"
+      }
+    }
+  }
+}
+
+

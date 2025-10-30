@@ -1,0 +1,22 @@
+[
+  {
+    "check": "Firestore Rules",
+    "status": "❌ FAIL",
+    "details": "firestore.rules not found"
+  },
+  {
+    "check": "Audit Logs",
+    "status": "⚠️ WARN",
+    "details": "No audit logs found - system ready for logging"
+  },
+  {
+    "check": "Clips Retention",
+    "status": "✅ PASS",
+    "details": "All clips within retention"
+  },
+  {
+    "check": "Wrap-Up Script",
+    "status": "⚠️ WARN",
+    "details": "tournamentWrapUp.ts missing"
+  }
+]

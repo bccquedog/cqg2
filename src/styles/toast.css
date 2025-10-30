@@ -1,0 +1,49 @@
+.cqg-toast {
+  background: linear-gradient(135deg, #0f0f10, #1a1a1d);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  color: #fff;
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  backdrop-filter: blur(6px);
+  animation: cqg-toast-fadein 0.4s ease forwards;
+}
+
+.cqg-toast-body {
+  font-size: 0.95rem;
+  letter-spacing: 0.3px;
+  font-weight: 500;
+}
+
+.cqg-toast-enter {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.cqg-toast-enter-active {
+  transform: translateX(0);
+  opacity: 1;
+  transition: all 0.4s ease;
+}
+
+.cqg-toast-exit {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.cqg-toast-exit-active {
+  transform: translateX(100%);
+  opacity: 0;
+  transition: all 0.4s ease;
+}
+
+@keyframes cqg-toast-fadein {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+
