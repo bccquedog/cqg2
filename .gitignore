@@ -39,3 +39,25 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Firebase
+*-firebase-adminsdk-*.json
+firebase-debug.log
+firestore-debug.log
+database-debug.log
+functions/serviceAccountKey.json
+functions/lib/
+*.log
+
+# Firebase emulator
+.firebase/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+*.swp
+*.swo
+*~
